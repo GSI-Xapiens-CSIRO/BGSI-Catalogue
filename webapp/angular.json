@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "beacon-v2-ui": {
+    "bgsi-catalogue": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -20,7 +20,7 @@
             "loader": {
               ".ttf": "binary"
             },
-            "outputPath": "dist/beacon-v2-ui",
+            "outputPath": "dist/bgsi-catalogue",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -94,10 +94,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "beacon-v2-ui:build:production"
+              "buildTarget": "bgsi-catalogue:build:production"
             },
             "development": {
-              "buildTarget": "beacon-v2-ui:build:development"
+              "buildTarget": "bgsi-catalogue:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -105,7 +105,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "beacon-v2-ui:build"
+            "buildTarget": "bgsi-catalogue:build"
           }
         },
         "test": {

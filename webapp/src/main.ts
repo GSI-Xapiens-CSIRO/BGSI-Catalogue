@@ -1,6 +1,6 @@
 /// <reference types="@angular/localize" />
 
-import { Amplify, Auth } from 'aws-amplify';
+//import { Amplify, Auth } from 'aws-amplify';
 
 import { environment } from './environments/environment';
 import { enableProdMode } from '@angular/core';
@@ -13,7 +13,7 @@ if (environment.production) {
   enableProdMode();
 }
 
-Amplify.configure({
+/*Amplify.configure({
   Auth: environment.auth,
   Storage: {
     AWSS3: {
@@ -60,3 +60,4 @@ Amplify.configure({
 bootstrapApplication(AppComponent, appConfig).catch((err) =>
   console.error(err),
 );
+*/

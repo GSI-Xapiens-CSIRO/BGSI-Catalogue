@@ -1,0 +1,7 @@
+# common
+region = "XXXX"
+common-tags = {
+    "Owner" = "gaspi"
+    "Environment" = "dev"
+}
+# Hub APIs will be added as they become available

@@ -1,5 +1,5 @@
 {
-  "name": "beacon-v2-ui",
+  "name": "bgsi-catalogue",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -26,6 +26,8 @@
     "aws-sdk": "^2.1692.0",
     "lodash": "^4.17.21",
     "monaco-editor": "^0.50.0",
+    "rxjs": "~7.8.1",
+    "tslib": "^2.6.3",
     "zone.js": "~0.14.7"
   },
   "devDependencies": {
