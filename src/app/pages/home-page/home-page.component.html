@@ -1,0 +1,44 @@
+<mat-card class="md:p-10">
+  <mat-card-content class="text-lg">
+    <mat-tab-group
+      style="background: white"
+      [(selectedIndex)]="selectedIndex"
+      (selectedIndexChange)="getData($event)"
+    >
+      <mat-tab label="HUB 1"> </mat-tab>
+      <mat-tab label="HUB 2"> </mat-tab>
+      <mat-tab label="HUB 3"> </mat-tab>
+    </mat-tab-group>
+
+    <table
+      mat-table
+      [dataSource]="usersTableDataSource"
+      style="margin-top: 2rem"
+    >
+      @for (column of usersTableDisplayedColumns; track column) {
+        <ng-container [matColumnDef]="column">
+          <th class="whitespace-nowrap" mat-header-cell *matHeaderCellDef>
+            {{ column }}
+          </th>
+          <td class="whitespace-nowrap" mat-cell *matCellDef="let element">
+            {{ element[column] }}
+          </td>
+        </ng-container>
+      }
+      <tr mat-header-row *matHeaderRowDef="usersTableDisplayedColumns"></tr>
+      <tr
+        mat-row
+        class="hover:bg-slate-100 cursor-pointer"
+        *matRowDef="let row; columns: usersTableDisplayedColumns"
+      ></tr>
+    </table>
+
+    <!-- implement with api soon  -->
+    <mat-paginator
+      #paginator
+      [pageSizeOptions]="[10, 50]"
+      [pageSize]="pageSize"
+      length="9999"
+    ></mat-paginator>
+  </mat-card-content>
+</mat-card>
