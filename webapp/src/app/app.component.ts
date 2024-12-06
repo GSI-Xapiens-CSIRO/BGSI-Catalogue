@@ -1,5 +1,4 @@
 import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
-import { AuthService } from './services/auth.service';
 import {
   animate,
   state,
@@ -66,7 +65,6 @@ export class AppComponent implements OnInit {
   protected isCollapsed = false;
 
   constructor(
-    protected auth: AuthService,
     private router: Router,
     private el: ElementRef,
     private ss: SpinnerService,
@@ -87,15 +85,7 @@ export class AppComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    this.isCollapsed = this.el.nativeElement.offsetWidth < 1200;
-    // TODO - check if this is really necessary
-    // this prevents users from reloading and landing on same page even when they are logged in
-    // route security is enabled by the authguards
-    (async () => {
-      await this.auth.refresh();
-    })();
-  }
+  ngOnInit(): void {}
 
   @HostListener('window:resize', ['event'])
   onResize() {
