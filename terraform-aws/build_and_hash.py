@@ -77,7 +77,7 @@ if __name__ == "__main__":
     build_cmd = args["build_command"]
     install_cmd = args["install_command"]
     webapp_dir = args["webapp_dir"]
-    build_destination = args["build_destiation"]
+    build_destination = args["build_destination"]
 
     setup_env(
         webapp_dir,

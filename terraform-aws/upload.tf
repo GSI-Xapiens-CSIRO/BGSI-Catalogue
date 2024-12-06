@@ -4,7 +4,7 @@ data "external" "build" {
     install_command         = var.install-command
     build_command           = var.build-command
     webapp_dir              = var.webapp-dir
-    build_destiation        = var.build-destination
+    build_destination        = var.build-destination
   }
   working_dir = path.module
 }
