@@ -7,6 +7,13 @@ import json
 
 ENVIRONMENT = """export const environment = {{
   production: {production},
+  api_endpoint_hubs: [
+    {{
+        name: 'HUB 1',
+        endpoint: '{api_endpoint_hub1}',
+        region: '{region}',
+    }},
+  ]
 }};"""
 
 
@@ -55,6 +62,8 @@ def build(cmd: str, dir: str):
 
 def setup_env(
     dir: str,
+    region: str,
+    api_endpoint_hub1: str,
 ):
     with open(
         os.path.join(dir, "src/environments/environment.development.ts"), "w"
@@ -62,12 +71,16 @@ def setup_env(
         f.write(
             ENVIRONMENT.format(
                 production="false",
+                region=region,
+                api_endpoint_hub1=api_endpoint_hub1,
             )
         )
     with open(os.path.join(dir, "src/environments/environment.ts"), "w") as f:
         f.write(
             ENVIRONMENT.format(
                 production="true",
+                region=region,
+                api_endpoint_hub1=api_endpoint_hub1,
             )
         )
 
@@ -78,9 +91,13 @@ if __name__ == "__main__":
     install_cmd = args["install_command"]
     webapp_dir = args["webapp_dir"]
     build_destination = args["build_destination"]
+    region = args["region"]
+    api_endpoint_hub1 = args["api_endpoint_hub1"]
 
     setup_env(
         webapp_dir,
+        region,
+        api_endpoint_hub1
     )
     npm_install(install_cmd, webapp_dir)
     build(build_cmd, webapp_dir)

@@ -3,37 +3,37 @@
     <mat-tab-group
       style="background: white"
       [(selectedIndex)]="selectedIndex"
-      (selectedIndexChange)="getData($event)"
+      (selectedIndexChange)="list($event)"
     >
-      <mat-tab label="HUB 1"> </mat-tab>
-      <mat-tab label="HUB 2"> </mat-tab>
-      <mat-tab label="HUB 3"> </mat-tab>
+      @for (hub of hubs; track hub.name) {
+        <mat-tab [label]="hub.name">
+        </mat-tab>
+      }
     </mat-tab-group>
 
     <table
       mat-table
-      [dataSource]="usersTableDataSource"
+      [dataSource]="projectsTableDataSource"
       style="margin-top: 2rem"
     >
-      @for (column of usersTableDisplayedColumns; track column) {
+      @for (column of projectsTableDisplayedColumns; track column) {
         <ng-container [matColumnDef]="column">
           <th class="whitespace-nowrap" mat-header-cell *matHeaderCellDef>
             {{ column }}
           </th>
           <td class="whitespace-nowrap" mat-cell *matCellDef="let element">
-            {{ element[column] }}
+            {{ element[projectsTableColumnMap[column]] }}
           </td>
         </ng-container>
       }
-      <tr mat-header-row *matHeaderRowDef="usersTableDisplayedColumns"></tr>
+      <tr mat-header-row *matHeaderRowDef="projectsTableDisplayedColumns"></tr>
       <tr
         mat-row
         class="hover:bg-slate-100 cursor-pointer"
-        *matRowDef="let row; columns: usersTableDisplayedColumns"
+        *matRowDef="let row; columns: projectsTableDisplayedColumns"
       ></tr>
     </table>
 
-    <!-- implement with api soon  -->
     <mat-paginator
       #paginator
       [pageSizeOptions]="[10, 50]"

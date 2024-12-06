@@ -3,55 +3,75 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar'
+import { catchError, of } from 'rxjs';
 import _ from 'lodash';
+import { environment } from 'src/environments/environment';
+import { ApiService } from 'src/app/services/api.service'
+
+interface Project {
+  name: string;
+  description: string;
+  total_samples: number;
+}
 
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss'],
   standalone: true,
-  imports: [MatCardModule, MatTabsModule, MatTableModule, MatPaginatorModule],
+  imports: [
+    MatCardModule, 
+    MatTabsModule, 
+    MatTableModule, 
+    MatPaginatorModule,
+    MatSnackBarModule,
+  ],
 })
 export class HomePageComponent implements OnInit {
-  // protected usersTableDataSource: any = [];
   protected pageSize = 10;
-  protected usersTableDisplayedColumns: string[] = [
+  protected projectsTableColumnMap: { [key: string]: string } = {
+    'Project Name': 'name',
+    'Project Description': 'description',
+    'Number of Samples': 'total_samples',
+  };
+  protected projectsTableDisplayedColumns: string[] = [
     'Project Name',
     'Project Description',
-    'Number of Sample',
+    'Number of Samples',
   ];
   protected selectedIndex = 0;
+  protected hubs = environment.api_endpoint_hubs;
+  protected projects: any[] = [];
+  protected projectsTableDataSource: any[] = [];
 
-  protected usersTableDataSource: any[] = [];
+  constructor(
+    private as: ApiService,
+    private sb: MatSnackBar,
+  ) {}
 
   ngOnInit(): void {
-    this.getData(0);
+    this.list(this.selectedIndex);
   }
 
-  getData(index: number) {
-    if (index === 0) {
-      this.usersTableDataSource = this.data.hub1;
-    } else {
-      this.usersTableDataSource = this.data.hub2;
-    }
+  list(index: number) {
+    this.selectedIndex = index; 
+    const hub = this.hubs[index];
+    this.as
+      .getProjects(hub)
+      .pipe(catchError(() => of(null)))
+      .subscribe((projects: any) => {
+        if (!projects) {
+          this.sb.open('Unable to retrieve projects for this hub.', 'Close', {
+            duration: 60000,
+          });
+        } else {
+          this.projectsTableDataSource = projects.map((p: Project) => ({
+            ...p,
+            expanded: false,
+          }));
+          console.log(this.projectsTableDataSource);
+        }
+      });
   }
-
-  // fake data ==================
-  protected data: any = {
-    hub1: [
-      {
-        'Project Name': 'P1',
-        'Project Description': 'HyDrogen',
-        'Number of Sample': 1.0079,
-      },
-    ],
-    hub2: [
-      {
-        'Project Name': 'P2',
-        'Project Description': 'Non Hydrogen',
-        'Number of Sample': 1,
-      },
-    ],
-  };
-  // end fake data
 }
