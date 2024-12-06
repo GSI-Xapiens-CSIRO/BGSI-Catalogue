@@ -42,7 +42,6 @@ export class HomePageComponent implements OnInit {
   ];
   protected selectedIndex = 0;
   protected hubs = environment.api_endpoint_hubs;
-  protected projects: any[] = [];
   protected projectsTableDataSource: any[] = [];
 
   constructor(
