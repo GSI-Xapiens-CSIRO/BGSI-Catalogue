@@ -5,7 +5,7 @@
 .bui-header-wrapper {
   overflow: hidden;
   background: url(/assets/images/header.png) no-repeat right top;
-  background-size: contain;
+  background-size: cover;
 
   @media (max-width: 1024px) {
     background-size: cover;
@@ -144,7 +144,7 @@
 .bui-footer {
   height: 10%;
   overflow: hidden;
-  background: #2f2f2f url(/assets/images/bg02.jpg) repeat;
+  background: theme("colors.primary-10");
   padding: 50px 1px;
   text-align: center;
   color: #6f6f6f;
@@ -187,7 +187,6 @@
   top: -2em;
   font-weight: 500;
   font-size: 1em;
-  color: #8e8e8e;
   font: 16px Arial;
 }
 
@@ -233,4 +232,35 @@
   height: auto;
   opacity: 1;
   visibility: visible;
+}
+
+.bgsi-logo {
+  position: absolute;
+  right: 5rem;
+  top: 2rem;
+  width: 80px;
+  @media (max-width: 1280px) {
+    right: 3rem;
+    width: 50px;
+  }
+
+  @media (max-width: 900px) {
+    display: none;
+  }
+}
+
+.kemenkes-logo {
+  position: absolute;
+  right: 13rem;
+  top: 1.5rem;
+  width: 250px;
+
+  @media (max-width: 1280px) {
+    right: 8rem;
+    width: 180px;
+  }
+
+  @media (max-width: 900px) {
+    display: none;
+  }
 }
