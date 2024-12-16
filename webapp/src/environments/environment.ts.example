@@ -1,15 +1,10 @@
 export const environment = {
   production: false,
-  config_max_variant_search_base_range: 5000,
-  auth: {
-    region: 'XXXX',
-    userPoolId: 'XXXX_YYYYY',
-    userPoolWebClientId: 'XXXX',
-    authenticationFlowType: 'XXXX',
-  },
-  api_endpoint_sbeacon: {
-    name: 'XXXX',
-    endpoint: 'XXXX',
-    region: 'XXXX',
-  },
+  api_endpoint_hubs: [
+    {
+      name: "XXXX",
+      endpoint: "XXXXX",
+      region: "XXXXX",
+    },
+  ],
 };
