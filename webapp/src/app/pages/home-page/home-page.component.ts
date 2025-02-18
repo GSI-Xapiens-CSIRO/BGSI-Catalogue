@@ -140,6 +140,7 @@ export class HomePageComponent implements OnInit {
   }
 
   onSelectTab(index: number): void {
+    this.resetPagination();
     this.list(index, 0, '');
   }
 
@@ -188,6 +189,7 @@ export class HomePageComponent implements OnInit {
           ) {
             this.paginator.pageIndex--;
             this.sb.open('No more items to show', 'Okay', { duration: 60000 });
+            this.ss.end();
             return;
           }
 
