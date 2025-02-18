@@ -13,6 +13,11 @@ ENVIRONMENT = """export const environment = {{
         endpoint: '{api_endpoint_hub1}',
         region: '{region}',
     }},
+    {{
+        name: 'HUB 2',
+        endpoint: '{api_endpoint_hub2}',
+        region: '{region}',
+    }},
   ]
 }};"""
 
@@ -64,6 +69,7 @@ def setup_env(
     dir: str,
     region: str,
     api_endpoint_hub1: str,
+    api_endpoint_hub2: str,
 ):
     with open(
         os.path.join(dir, "src/environments/environment.development.ts"), "w"
@@ -73,6 +79,7 @@ def setup_env(
                 production="false",
                 region=region,
                 api_endpoint_hub1=api_endpoint_hub1,
+                api_endpoint_hub2=api_endpoint_hub2,
             )
         )
     with open(os.path.join(dir, "src/environments/environment.ts"), "w") as f:
@@ -81,6 +88,7 @@ def setup_env(
                 production="true",
                 region=region,
                 api_endpoint_hub1=api_endpoint_hub1,
+                api_endpoint_hub2=api_endpoint_hub2,
             )
         )
 
@@ -93,11 +101,13 @@ if __name__ == "__main__":
     build_destination = args["build_destination"]
     region = args["region"]
     api_endpoint_hub1 = args["api_endpoint_hub1"]
+    api_endpoint_hub2 = args["api_endpoint_hub2"]
 
     setup_env(
         webapp_dir,
         region,
-        api_endpoint_hub1
+        api_endpoint_hub1,
+        api_endpoint_hub2,
     )
     npm_install(install_cmd, webapp_dir)
     build(build_cmd, webapp_dir)
