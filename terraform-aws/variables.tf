@@ -38,3 +38,8 @@ variable "api-endpoint-hub1" {
   type        = string
   description = "API URL for HUB1"
 }
+
+variable "api-endpoint-hub2" {
+  type        = string
+  description = "API URL for HUB2"
+}

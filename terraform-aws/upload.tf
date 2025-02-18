@@ -7,6 +7,7 @@ data "external" "build" {
     build_destination       = var.build-destination
     region                  = var.region
     api_endpoint_hub1       = var.api-endpoint-hub1
+    api_endpoint_hub2       = var.api-endpoint-hub2
   }
   working_dir = path.module
 }
