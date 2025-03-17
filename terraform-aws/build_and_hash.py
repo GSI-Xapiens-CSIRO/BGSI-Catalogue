@@ -7,17 +7,7 @@ import json
 
 ENVIRONMENT = """export const environment = {{
   production: {production},
-  api_endpoint_hubs: [
-    {{
-        name: 'HUB 1',
-        endpoint: '{api_endpoint_hub1}',
-        region: '{region}',
-    }},
-    {{
-        name: 'HUB 2',
-        endpoint: '{api_endpoint_hub2}',
-        region: '{region}',
-    }},
+  api_endpoint_hubs: [{api_endpoint_hubs}
   ]
 }};"""
 
@@ -68,9 +58,17 @@ def build(cmd: str, dir: str):
 def setup_env(
     dir: str,
     region: str,
-    api_endpoint_hub1: str,
-    api_endpoint_hub2: str,
+    api_endpoint_hubs: dict,
 ):
+    hub_entries = []
+    for idx, (name, endpoint) in enumerate(api_endpoint_hubs.items()):
+        hub_entries.append(f"""
+        {{
+            name: 'HUB {idx + 1}',
+            endpoint: '{endpoint}',
+            region: '{region}',
+        }}""")
+        hub_entries_str = ",".join(hub_entries)
     with open(
         os.path.join(dir, "src/environments/environment.development.ts"), "w"
     ) as f:
@@ -78,8 +76,7 @@ def setup_env(
             ENVIRONMENT.format(
                 production="false",
                 region=region,
-                api_endpoint_hub1=api_endpoint_hub1,
-                api_endpoint_hub2=api_endpoint_hub2,
+                api_endpoint_hubs=hub_entries_str,
             )
         )
     with open(os.path.join(dir, "src/environments/environment.ts"), "w") as f:
@@ -87,8 +84,7 @@ def setup_env(
             ENVIRONMENT.format(
                 production="true",
                 region=region,
-                api_endpoint_hub1=api_endpoint_hub1,
-                api_endpoint_hub2=api_endpoint_hub2,
+                api_endpoint_hubs=hub_entries_str,
             )
         )
 
@@ -100,14 +96,12 @@ if __name__ == "__main__":
     webapp_dir = args["webapp_dir"]
     build_destination = args["build_destination"]
     region = args["region"]
-    api_endpoint_hub1 = args["api_endpoint_hub1"]
-    api_endpoint_hub2 = args["api_endpoint_hub2"]
+    api_endpoint_hubs = json.loads(args["api_endpoint_hubs"])
 
     setup_env(
         webapp_dir,
         region,
-        api_endpoint_hub1,
-        api_endpoint_hub2,
+        api_endpoint_hubs,
     )
     npm_install(install_cmd, webapp_dir)
     build(build_cmd, webapp_dir)

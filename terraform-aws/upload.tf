@@ -1,13 +1,12 @@
 data "external" "build" {
   program = ["python", "build_and_hash.py"]
   query = {
-    install_command         = var.install-command
-    build_command           = var.build-command
-    webapp_dir              = var.webapp-dir
-    build_destination       = var.build-destination
-    region                  = var.region
-    api_endpoint_hub1       = var.api-endpoint-hub1
-    api_endpoint_hub2       = var.api-endpoint-hub2
+    install_command   = var.install-command
+    build_command     = var.build-command
+    webapp_dir        = var.webapp-dir
+    build_destination = var.build-destination
+    region            = var.region
+    api_endpoint_hubs = jsonencode(var.api-endpoint-hubs)
   }
   working_dir = path.module
 }

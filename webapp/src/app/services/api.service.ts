@@ -14,7 +14,7 @@ export class ApiService {
     last_evaluated_key: string | null = null,
     search: string = '',
   ): Observable<any> {
-    const url = `${hub_api_endpoint.endpoint}prod/projects`;
+    const url = `${hub_api_endpoint.endpoint}/prod/projects`;
     return this.http.get(url, {
       params: {
         limit: limit.toString(),

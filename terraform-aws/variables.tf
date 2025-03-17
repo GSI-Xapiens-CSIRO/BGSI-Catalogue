@@ -34,12 +34,7 @@ variable "build-destination" {
   default     = "../webapp/dist/bgsi-catalogue/browser"
 }
 
-variable "api-endpoint-hub1" {
-  type        = string
-  description = "API URL for HUB1"
-}
-
-variable "api-endpoint-hub2" {
-  type        = string
-  description = "API URL for HUB2"
+variable "api-endpoint-hubs" {
+  type        = map(string)
+  description = "API URLs for each hub"
 }
