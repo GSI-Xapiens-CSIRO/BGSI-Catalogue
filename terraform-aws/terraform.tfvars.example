@@ -4,4 +4,9 @@ common-tags = {
     "Owner" = "gaspi"
     "Environment" = "dev"
 }
-# Hub APIs will be added as they become available
+# hub APIs - correspond to the Beacon API url of each hub
+# The first masked value corresponds to the API ID
+# The second masked value corresponds to the deployment region
+api-endpoint-hubs {
+    "hub1" = "https://XXXX.execute-api.XXXX.amazonaws.com"
+}
