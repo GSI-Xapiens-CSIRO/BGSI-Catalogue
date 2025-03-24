@@ -13,8 +13,8 @@ Create the necessary Terraform configuration files:
 - `terraform.tfvars`
 
 Refer to the provided example files:
-- `example.backend.tf`
-- `example.terraform.tfvars`
+- `backend.tf.example`
+- `terraform.tfvars.example`
 
 Modify the values in these files as needed. Ensure that the correct API URL is provided for each Hub.
 
