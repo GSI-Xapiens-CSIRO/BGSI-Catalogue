@@ -19,14 +19,14 @@ Refer to the provided example files:
 Modify the values in these files as needed. Ensure that the correct API URL is provided for each Hub.
 
 ### 2. Install Frontend Dependencies
-From the repository root, navigate to the `webapp/webgui` directory and install dependencies:
+From the repository root, navigate to the `webapp` directory and install dependencies:
 ```sh
-cd webapp/webgui
+cd webapp
 pnpm install
 ```
 
 ### 3. Initialise and Apply Terraform Configuration
-From the project root, navigate to the `terraform-aws` directory and run the following commands:
+From the repository root, navigate to the `terraform-aws` directory and run the following commands:
 ```sh
 cd terraform-aws
 terraform init
