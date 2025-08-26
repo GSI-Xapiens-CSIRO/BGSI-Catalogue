@@ -55,20 +55,23 @@ def build(cmd: str, dir: str):
     code = out.wait()
     assert code == 0, "ERROR: ng build returned non-zero exit"
 
+
 def setup_env(
     dir: str,
     region: str,
     api_endpoint_hubs: dict,
 ):
     hub_entries = []
-    for idx, (name, endpoint) in enumerate(api_endpoint_hubs.items()):
-        hub_entries.append(f"""
+    for name, endpoint in api_endpoint_hubs.items():
+        hub_entries.append(
+            f"""
         {{
-            name: 'HUB {idx + 1}',
+            name: '{name}',
             endpoint: '{endpoint}',
             region: '{region}',
-        }}""")
-        hub_entries_str = ",".join(hub_entries)
+        }}"""
+        )
+    hub_entries_str = ",".join(hub_entries)
     with open(
         os.path.join(dir, "src/environments/environment.development.ts"), "w"
     ) as f:
